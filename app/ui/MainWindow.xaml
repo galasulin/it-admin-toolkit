@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ארגז כלים IT" Height="820" Width="1340" MinHeight="600" MinWidth="1000"
+        FlowDirection="RightToLeft" FontFamily="Segoe UI" FontSize="13"
+        Background="#F4F6F9" WindowStartupLocation="CenterScreen">
+  <Window.Resources>
+    <Style TargetType="Button">
+      <Setter Property="Padding" Value="14,6"/>
+      <Setter Property="Margin" Value="4,0"/>
+      <Setter Property="Background" Value="#FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#C9D2DD"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+  </Window.Resources>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- כותרת עליונה -->
+    <Border Grid.Row="0" Background="#1F3A5F" Padding="16,10">
+      <DockPanel LastChildFill="False">
+        <StackPanel DockPanel.Dock="Left" Orientation="Vertical" VerticalAlignment="Center">
+          <TextBlock x:Name="txtTitle" Text="ארגז כלים IT" Foreground="White" FontSize="20" FontWeight="SemiBold"/>
+          <TextBlock x:Name="txtSubtitle" Text="" Foreground="#AFC3DB" FontSize="12"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+          <TextBlock Text="יעד:" Foreground="White" VerticalAlignment="Center" Margin="0,0,6,0" FontWeight="SemiBold"/>
+          <ComboBox x:Name="cmbTarget" IsEditable="True" Width="240" Padding="6,4" FlowDirection="LeftToRight"/>
+          <Button x:Name="btnTest" Content="בדוק חיבור"/>
+          <Button x:Name="btnRdp" Content="RDP" ToolTip="פתיחת שולחן עבודה מרוחק ליעד"/>
+          <Button x:Name="btnMgmt" Content="ניהול מחשב" ToolTip="Computer Management מול היעד"/>
+          <Button x:Name="btnCred" Content="הרשאות..."/>
+          <TextBlock x:Name="txtCred" Foreground="#AFC3DB" VerticalAlignment="Center" Margin="6,0,0,0" Text="משתמש נוכחי"/>
+        </StackPanel>
+      </DockPanel>
+    </Border>
+
+    <Grid Grid.Row="1" Margin="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="310"/>
+        <ColumnDefinition Width="10"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- רשימת כלים -->
+      <Border Grid.Column="0" Background="White" CornerRadius="6" BorderBrush="#DDE3EA" BorderThickness="1" Padding="8">
+        <DockPanel>
+          <TextBlock DockPanel.Dock="Top" Text="חיפוש כלי" Foreground="#5B6B7D" Margin="2,0,0,4"/>
+          <TextBox x:Name="txtSearch" DockPanel.Dock="Top" Padding="6,4" Margin="0,0,0,8"/>
+          <TreeView x:Name="tvTools" BorderThickness="0"/>
+        </DockPanel>
+      </Border>
+
+      <!-- אזור עבודה -->
+      <Grid Grid.Column="2">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="8"/>
+          <RowDefinition Height="170"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="White" CornerRadius="6" BorderBrush="#DDE3EA" BorderThickness="1" Padding="14" Margin="0,0,0,10">
+          <StackPanel>
+            <TextBlock x:Name="txtToolTitle" Text="בחר כלי מהרשימה" FontSize="18" FontWeight="SemiBold"/>
+            <TextBlock x:Name="txtToolDesc" TextWrapping="Wrap" Foreground="#3B4A5A" Margin="0,6,0,8"/>
+            <WrapPanel>
+              <Border x:Name="bdRisk" CornerRadius="10" Padding="10,3" Margin="0,0,8,6" Background="#E6EAEF">
+                <TextBlock x:Name="txtRisk" Text="" FontWeight="SemiBold"/>
+              </Border>
+              <TextBlock x:Name="txtRunOn" VerticalAlignment="Center" Foreground="#5B6B7D" Margin="0,0,16,6"/>
+            </WrapPanel>
+            <WrapPanel Margin="0,4,0,0">
+              <Button x:Name="btnRun" Content="▶  הרץ" FontWeight="SemiBold" Background="#1F6FEB" Foreground="White" BorderBrush="#1F6FEB" IsEnabled="False"/>
+              <Button x:Name="btnStop" Content="עצור" IsEnabled="False"/>
+              <Button x:Name="btnHtml" Content="ייצוא דוח HTML" IsEnabled="False"/>
+              <Button x:Name="btnCsv" Content="ייצוא לאקסל (CSV)" IsEnabled="False"/>
+              <Button x:Name="btnCopy" Content="העתק" IsEnabled="False"/>
+              <Button x:Name="btnLogs" Content="תיקיית לוגים ודוחות"/>
+            </WrapPanel>
+          </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Background="White" CornerRadius="6" BorderBrush="#DDE3EA" BorderThickness="1">
+          <DataGrid x:Name="dgResults" AutoGenerateColumns="True" IsReadOnly="True" BorderThickness="0"
+                    HeadersVisibility="Column" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EEF1F4"
+                    CanUserSortColumns="True" RowHeaderWidth="0" SelectionMode="Extended" ClipboardCopyMode="IncludeHeader"/>
+        </Border>
+
+        <Border Grid.Row="3" Background="#0F1B2A" CornerRadius="6" Padding="4">
+          <TextBox x:Name="txtLog" IsReadOnly="True" Background="Transparent" Foreground="#CFE0F5" BorderThickness="0"
+                   FontFamily="Consolas, Segoe UI" FontSize="12" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+        </Border>
+      </Grid>
+    </Grid>
+
+    <Border Grid.Row="2" Background="#E6EAEF" Padding="12,5">
+      <DockPanel>
+        <ProgressBar x:Name="pbBusy" DockPanel.Dock="Right" Width="160" Height="10" IsIndeterminate="True" Visibility="Collapsed"/>
+        <TextBlock x:Name="txtStatus" Text="מוכן" Foreground="#3B4A5A"/>
+      </DockPanel>
+    </Border>
+  </Grid>
+</Window>

@@ -1,0 +1,26 @@
+# Script output - may contain names, addresses, serial numbers or backups
+logs/
+exports/
+*.log
+*.csv
+*.xlsx
+*.txt
+!LICENSE
+*.wfw
+*.reg
+*.bak
+*.trn
+secret-expiry-*.txt
+
+# Local settings / scratch
+*.local.ps1
+*.local.json
+.vscode/
+Thumbs.db
+desktop.ini
+app/config.json
+app/logs/
+app/reports/
+app/qa/qa-*
+app/qa/only.txt
+app/ui-src/node_modules/

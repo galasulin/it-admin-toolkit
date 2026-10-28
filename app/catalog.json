@@ -1,0 +1,933 @@
+{
+  "categories": [
+    "תחנות עבודה – אבחון",
+    "תחנות עבודה – תיקונים",
+    "הקמה ושדרוגים",
+    "מדפסות",
+    "שרתים",
+    "משתמשים ו-AD",
+    "Office 365",
+    "אבטחה",
+    "רגיש – מוצג רק על המסך",
+    "רשת",
+    "דוחות"
+  ],
+  "tools": [
+    {
+      "id": "ws-sysinfo",
+      "category": "תחנות עבודה – אבחון",
+      "title": "מידע מערכת",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-SysInfo.ps1",
+      "desc": "מערכת הפעלה וגרסה מדויקת, דגם, מספר סריאלי, מעבד, זיכרון, דומיין, משתמש מחובר וזמן פעילות מאז ההפעלה האחרונה."
+    },
+    {
+      "id": "ws-disk",
+      "category": "תחנות עבודה – אבחון",
+      "title": "מצב דיסקים",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-DiskStatus.ps1",
+      "desc": "מקום פנוי בכל כונן, עם אזהרה מתחת ל-20% ומצב קריטי מתחת ל-10%, ומצב הבריאות של הדיסקים הפיזיים (SMART)."
+    },
+    {
+      "id": "ws-pending-reboot",
+      "category": "תחנות עבודה – אבחון",
+      "title": "ממתין לאתחול?",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-PendingReboot.ps1",
+      "desc": "בודק את כל המקומות שבהם Windows מסמן שנדרש אתחול: עדכונים, התקנות, שינוי שם מחשב וקבצים שממתינים להחלפה."
+    },
+    {
+      "id": "ws-events",
+      "category": "תחנות עבודה – אבחון",
+      "title": "שגיאות אחרונות ביומן",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-RecentErrors.ps1",
+      "desc": "שגיאות ואירועים קריטיים מהיומנים System ו-Application, מקובצים לפי מקור וממוינים לפי כמות, כדי לראות מה חוזר על עצמו.",
+      "params": [
+        {
+          "name": "Days",
+          "label": "כמה ימים אחורה?",
+          "default": "1",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ws-bsod",
+      "category": "תחנות עבודה – אבחון",
+      "title": "היסטוריית מסכים כחולים",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-BsodHistory.ps1",
+      "desc": "קריסות (BugCheck), כיבויים לא תקינים (Kernel-Power 41) וקבצי Minidump ב-90 הימים האחרונים."
+    },
+    {
+      "id": "ws-devices",
+      "category": "תחנות עבודה – אבחון",
+      "title": "התקנים עם תקלה",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-ProblemDevices.ps1",
+      "desc": "התקנים עם סימן קריאה במנהל ההתקנים: דרייבר חסר, התקן שלא עולה או התקן מושבת."
+    },
+    {
+      "id": "ws-startup",
+      "category": "תחנות עבודה – אבחון",
+      "title": "תוכניות בהפעלה",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-StartupItems.ps1",
+      "desc": "כל מה שעולה עם המחשב, כולל Run ותיקיית Startup. טוב לבדיקת מחשב איטי."
+    },
+    {
+      "id": "ws-installed",
+      "category": "תחנות עבודה – אבחון",
+      "title": "תוכנות מותקנות",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-InstalledSoftware.ps1",
+      "desc": "רשימת תוכנות עם גרסה, יצרן ותאריך התקנה. אפשר לסנן לפי שם.",
+      "params": [
+        {
+          "name": "Filter",
+          "label": "סינון לפי שם (להשאיר ריק לכל הרשימה)",
+          "default": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "ws-users",
+      "category": "תחנות עבודה – אבחון",
+      "title": "מי מחובר עכשיו",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-LoggedOnUsers.ps1",
+      "desc": "משתמשים מחוברים וסשנים מנותקים, כולל ID. שימושי במיוחד בשרת Terminal."
+    },
+    {
+      "id": "ws-pst",
+      "category": "תחנות עבודה – אבחון",
+      "title": "קבצי PST/OST גדולים",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Find-OutlookDataFiles.ps1",
+      "desc": "מוצא קבצי Outlook בכל הפרופילים. מעל 20GB Outlook נהיה איטי, ומעל 50GB הוא עלול להיתקע."
+    },
+    {
+      "id": "ws-battery",
+      "category": "תחנות עבודה – אבחון",
+      "title": "בריאות סוללה",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-BatteryHealth.ps1",
+      "desc": "קיבולת מקורית מול קיבולת היום ומספר מחזורי טעינה. מתחת ל-70% כדאי להחליף."
+    },
+    {
+      "id": "ws-win11",
+      "category": "תחנות עבודה – אבחון",
+      "title": "כשירות ל-Windows 11",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Test-Win11Ready.ps1",
+      "desc": "בודק TPM 2.0, Secure Boot, UEFI, זיכרון ודיסק. את המעבד צריך לאמת מול רשימת Microsoft, והכלי מציג את הדגם."
+    },
+    {
+      "id": "ws-wu-status",
+      "category": "תחנות עבודה – אבחון",
+      "title": "מצב Windows Update",
+      "risk": "read",
+      "runOn": "target",
+      "file": "workstation\\Get-WindowsUpdateStatus.ps1",
+      "desc": "מתי הותקן העדכון האחרון, מצב השירותים, האם יש WSUS או מדיניות, וכמה עדכונים ממתינים. החיפוש עשוי לקחת כמה דקות."
+    },
+    {
+      "id": "fix-dns",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "ניקוי DNS ורישום מחדש",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Repair-Dns.ps1",
+      "desc": "מנקה את זיכרון ה-DNS של המחשב ורושם אותו מחדש בשרת ה-DNS. לא מנתק את הרשת.",
+      "actions": "1. ניקוי DNS Cache\n2. ipconfig /registerdns"
+    },
+    {
+      "id": "fix-wu-reset",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "איפוס רכיבי Windows Update",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Reset-WindowsUpdate.ps1",
+      "desc": "התיקון הקלאסי כשעדכונים נתקעים או נכשלים (למשל 0x80070003). התיקיות לא נמחקות, רק משנים להן שם.",
+      "actions": "1. עצירת השירותים wuauserv, bits, cryptsvc, msiserver\n2. שינוי שם SoftwareDistribution ו-catroot2 לשם עם תאריך (לא נמחק)\n3. הפעלת השירותים מחדש"
+    },
+    {
+      "id": "fix-sfc",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "תיקון קבצי מערכת (DISM + SFC)",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Repair-SystemFiles.ps1",
+      "desc": "מריץ DISM RestoreHealth ואחריו SFC. לוקח 15 עד 40 דקות, ולא צריך לסגור את החלון בינתיים.",
+      "actions": "1. DISM /Online /Cleanup-Image /RestoreHealth\n2. sfc /scannow\nייתכן שיידרש אתחול אחרי התיקון."
+    },
+    {
+      "id": "fix-temp",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "ניקוי קבצים זמניים",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Clear-TempFiles.ps1",
+      "desc": "מוחק קבצים זמניים שלא שונו X ימים: Windows Temp, Temp של משתמשים, Cache של דפדפנים, קבצי קריסה והורדות ישנות של Windows Update. לא נוגע במסמכים ובהורדות.",
+      "actions": "1. מחיקה של קבצים זמניים ישנים בלבד (לא שונו X ימים)\n2. קבצים נעולים מדולגים\nזו פעולת מחיקה. הקבצים לא חוזרים, אבל הם זמניים.",
+      "params": [
+        {
+          "name": "Days",
+          "label": "למחוק קבצים זמניים שלא שונו כמה ימים?",
+          "default": "7",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "fix-teams",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "איפוס Cache של Teams",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Reset-TeamsCache.ps1",
+      "desc": "הפתרון הקבוע ל-Teams שלא נטען, לא מסתנכרן או מציג מסך לבן. מטפל ב-Teams הקלאסי ובחדש. התיקיות מקבלות שם חדש ולא נמחקות.",
+      "actions": "1. שינוי שם לתיקיות ה-Cache של Teams (לא מחיקה)\n2. מדלג על משתמש ש-Teams פתוח אצלו",
+      "params": [
+        {
+          "name": "User",
+          "label": "שם תיקיית המשתמש ב-C:\\Users (ריק = כולם)",
+          "default": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "fix-rdp-clip",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "תיקון העתק-הדבק ב-RDP",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Repair-RdpClipboard.ps1",
+      "desc": "מאפשר העתקה בין המחשבים בחיבור מרחוק. מריצים על המחשב שמתחברים אליו. השירות לא מופעל מחדש, כדי לא לנתק משתמשים.",
+      "actions": "1. fDisableClip=0 ב-RDP-Tcp\n2. בדיקה אם יש GPO שחוסם\nהמשתמש צריך לבצע Sign Out מלא (לא רק Disconnect)."
+    },
+    {
+      "id": "fix-enable-rdp",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "הפעלת שולחן עבודה מרוחק",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Enable-RemoteDesktop.ps1",
+      "desc": "מפעיל RDP ופותח את כללי חומת האש. NLA (אימות לפני חיבור) נשאר פעיל, וזה המצב הבטוח.",
+      "actions": "1. fDenyTSConnections=0\n2. הפעלת קבוצת חוקי Remote Desktop בחומת האש\n3. NLA נשאר פעיל"
+    },
+    {
+      "id": "fix-time",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "סנכרון שעון ואזור זמן",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Sync-Time.ps1",
+      "desc": "מסנכרן את השעון מול מקור הזמן (ה-DC בדומיין). שעון לא מסונכרן גורם לתקלות כניסה ב-Kerberos ובאתרים.",
+      "actions": "1. w32tm /resync /force\n2. אם בחרת: קביעת אזור זמן ישראל",
+      "params": [
+        {
+          "name": "SetIsrael",
+          "label": "לקבוע אזור זמן ישראל אם הוא שונה? (כן/לא)",
+          "default": "כן",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "fix-logoff",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "ניתוק סשן תקוע",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Disconnect-UserSession.ps1",
+      "desc": "מבצע Log off לסשן לפי ID (את ה-ID רואים ב\"מי מחובר עכשיו\"). פותר משתמש תקוע ב-RDP או בשרת Terminal.",
+      "actions": "1. logoff לסשן שבחרת\nקבצים שלא נשמרו אצל המשתמש יאבדו.",
+      "params": [
+        {
+          "name": "SessionId",
+          "label": "מספר הסשן (ID)",
+          "default": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "fix-restart",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "אתחול מתוזמן",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Restart-Scheduled.ps1",
+      "desc": "מאתחל את היעד בעוד X דקות. המשתמש מקבל הודעה על המסך. לביטול: להריץ שוב ולהקליד \"בטל\".",
+      "actions": "1. shutdown /r עם הודעה למשתמש\nכל עבודה שלא נשמרה אצל המשתמש תאבד.",
+      "params": [
+        {
+          "name": "Minutes",
+          "label": "בעוד כמה דקות? (או בטל)",
+          "default": "10",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "fix-restore-point",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "יצירת נקודת שחזור",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\New-RestorePoint.ps1",
+      "desc": "יוצר נקודת שחזור לפני שינוי גדול. עובד רק על Windows 10/11 ולא על שרתים. Windows מגביל ליצירה אחת ב-24 שעות.",
+      "actions": "1. Checkpoint-Computer"
+    },
+    {
+      "id": "fix-spooler",
+      "category": "תחנות עבודה – תיקונים",
+      "title": "תיקון מדפסות תקועות (Spooler)",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Repair-PrintSpooler.ps1",
+      "desc": "משחרר תור הדפסה תקוע. העבודות התקועות מועברות לתיקיית גיבוי ולא נמחקות.",
+      "actions": "1. עצירת שירות Spooler\n2. העברת קבצי התור ל-C:\\ProgramData\\IT-Toolkit\\spool-backup\n3. הפעלת Spooler מחדש\nכל עבודות ההדפסה שבתור יבוטלו."
+    },
+    {
+      "id": "setup-apps",
+      "category": "הקמה ושדרוגים",
+      "title": "התקנת תוכנות סטנדרטיות",
+      "risk": "change",
+      "runOn": "target",
+      "file": "setup\\Install-StandardApps.ps1",
+      "desc": "מתקין דרך winget את רשימת StandardApps מ-config, או את מה שתקליד. רץ בשקט, בלי שאלות.",
+      "actions": "1. winget install לכל תוכנה ברשימה (scope machine)",
+      "params": [
+        {
+          "name": "Apps",
+          "label": "מזהי winget מופרדים בפסיק (ריק = הרשימה מ-config)",
+          "default": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "setup-list-upd",
+      "category": "הקמה ושדרוגים",
+      "title": "תוכנות שיש להן עדכון",
+      "risk": "read",
+      "runOn": "target",
+      "file": "setup\\Get-AvailableUpdates.ps1",
+      "desc": "רשימה של כל התוכנות שיש להן גרסה חדשה ב-winget. לא מעדכן כלום."
+    },
+    {
+      "id": "setup-update-all",
+      "category": "הקמה ושדרוגים",
+      "title": "עדכון תוכנות",
+      "risk": "change",
+      "runOn": "target",
+      "file": "setup\\Update-AllSoftware.ps1",
+      "desc": "מעדכן דרך winget את כל התוכנות, או רק את המזהים שתקליד. תוכנות פתוחות עלולות להיסגר.",
+      "actions": "1. winget upgrade (הכול או רשימה)\nתוכנות פתוחות אצל המשתמש עלולות להיסגר.",
+      "params": [
+        {
+          "name": "Ids",
+          "label": "מזהים מופרדים בפסיק (ריק = הכול)",
+          "default": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "setup-join",
+      "category": "הקמה ושדרוגים",
+      "title": "שינוי שם וצירוף לדומיין",
+      "risk": "change",
+      "runOn": "target",
+      "file": "setup\\Join-ComputerToDomain.ps1",
+      "desc": "למחשב חדש: נותן שם לפי השיטה שלך ומצרף לדומיין (אפשר גם ל-OU מסוים). לא מאתחל לבד.",
+      "actions": "1. Rename-Computer / Add-Computer\n2. נדרש אתחול אחרי (לא אוטומטי)",
+      "params": [
+        {
+          "name": "NewName",
+          "label": "שם מחשב חדש (ריק = להשאיר)",
+          "default": "",
+          "required": false
+        },
+        {
+          "name": "Domain",
+          "label": "דומיין לצירוף (ריק = רק שינוי שם)",
+          "default": "",
+          "required": false
+        },
+        {
+          "name": "OU",
+          "label": "OU (DistinguishedName, ריק = ברירת מחדל)",
+          "default": "",
+          "required": false
+        },
+        {
+          "name": "DomainCred",
+          "label": "משתמש עם הרשאה לצרף מחשבים לדומיין",
+          "default": "",
+          "required": true,
+          "type": "credential"
+        }
+      ]
+    },
+    {
+      "id": "setup-winupgrade",
+      "category": "הקמה ושדרוגים",
+      "title": "שדרוג Windows (22H2 / 11)",
+      "risk": "change",
+      "runOn": "target",
+      "file": "setup\\Start-WindowsUpgrade.ps1",
+      "desc": "מוריד את כלי השדרוג הרשמי של Microsoft, מוודא שהוא חתום, ומריץ אותו ברקע. הקבצים והתוכנות נשמרים. לוקח 1-2 שעות, והמחשב יאותחל לבד בסוף.",
+      "actions": "1. בדיקת מקום פנוי (20GB לפחות)\n2. הורדה מ-Microsoft ובדיקת חתימה\n3. שדרוג ברקע כ-SYSTEM\nהמחשב יאותחל אוטומטית בסוף השדרוג. לתאם עם המשתמש!",
+      "params": [
+        {
+          "name": "Target",
+          "label": "לאיזו גרסה? 10 = Windows 10 22H2 · 11 = Windows 11",
+          "default": "10",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "prn-status",
+      "category": "מדפסות",
+      "title": "מצב מדפסות ותורים",
+      "risk": "read",
+      "runOn": "target",
+      "file": "printers\\Get-PrinterStatus.ps1",
+      "desc": "כל המדפסות ביעד: פורט, דרייבר, Offline, תקלות נייר וטונר, וכמה עבודות בתור."
+    },
+    {
+      "id": "prn-spooler",
+      "category": "מדפסות",
+      "title": "תיקון מדפסות תקועות (Spooler)",
+      "risk": "change",
+      "runOn": "target",
+      "file": "fixes\\Repair-PrintSpooler.ps1",
+      "desc": "משחרר תור הדפסה תקוע. העבודות התקועות מועברות לתיקיית גיבוי ולא נמחקות.",
+      "actions": "1. עצירת שירות Spooler\n2. העברת קבצי התור ל-C:\\ProgramData\\IT-Toolkit\\spool-backup\n3. הפעלת Spooler מחדש\nכל עבודות ההדפסה שבתור יבוטלו."
+    },
+    {
+      "id": "prn-add",
+      "category": "מדפסות",
+      "title": "הוספת מדפסת רשת לכל המשתמשים",
+      "risk": "change",
+      "runOn": "target",
+      "file": "printers\\Add-NetworkPrinter.ps1",
+      "desc": "מוסיף מדפסת משותפת מהשרת לכל המשתמשים במחשב. היא מופיעה אצל כל משתמש בכניסה הבאה.",
+      "actions": "1. printui /ga (חיבור גלובלי)\n2. הפעלה מחדש של Spooler (עבודות בתור יבוטלו)",
+      "params": [
+        {
+          "name": "PrinterPath",
+          "label": "נתיב המדפסת, למשל \\\\PRINTSRV\\Reception",
+          "default": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "srv-health",
+      "category": "שרתים",
+      "title": "בדיקת בריאות שרת",
+      "risk": "read",
+      "runOn": "target",
+      "file": "servers\\Get-ServerHealth.ps1",
+      "desc": "דיסקים, שירותים אוטומטיים שנעצרו, זמן פעילות, ממתין לאתחול ושגיאות קריטיות מ-24 השעות האחרונות. הכול בטבלה אחת עם מצב לכל שורה."
+    },
+    {
+      "id": "srv-sql-backups",
+      "category": "שרתים",
+      "title": "סטטוס גיבויי SQL",
+      "risk": "read",
+      "runOn": "target",
+      "file": "servers\\Get-SqlBackupStatus.ps1",
+      "desc": "לכל מסד נתונים מוצג מתי רץ הגיבוי המלא, ה-Diff וה-Log האחרונים, והאם הגיבוי כלל Checksum. המסדים שהוגדרו כחובה ב-config מסומנים כקריטיים אם אין להם גיבוי עדכני."
+    },
+    {
+      "id": "srv-sql-jobs",
+      "category": "שרתים",
+      "title": "Jobs של SQL Agent",
+      "risk": "read",
+      "runOn": "target",
+      "file": "servers\\Get-SqlAgentJobs.ps1",
+      "desc": "כל ה-Jobs עם התוצאה של ההרצה האחרונה, וזמן ההרצה. Jobs שנכשלו מסומנים באדום."
+    },
+    {
+      "id": "srv-certs",
+      "category": "שרתים",
+      "title": "תעודות שעומדות לפוג",
+      "risk": "read",
+      "runOn": "target",
+      "file": "servers\\Get-ExpiringCertificates.ps1",
+      "desc": "תעודות SSL בחנות של המחשב (LocalMachine\\My) וכמה ימים נשארו לכל אחת.",
+      "params": [
+        {
+          "name": "Days",
+          "label": "להתריע על תעודות שפגות בתוך כמה ימים?",
+          "default": "60",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "srv-shares",
+      "category": "שרתים",
+      "title": "שיתופים פתוחים מדי",
+      "risk": "read",
+      "runOn": "target",
+      "file": "servers\\Get-OpenShares.ps1",
+      "desc": "כל השיתופים וההרשאות שלהם. שיתוף שפתוח ל-Everyone או ל-Authenticated Users עם הרשאת כתיבה מסומן לבדיקה."
+    },
+    {
+      "id": "ad-find",
+      "category": "משתמשים ו-AD",
+      "title": "חיפוש משתמש",
+      "risk": "read",
+      "runOn": "dc",
+      "file": "ad\\Find-AdUser.ps1",
+      "desc": "חיפוש לפי שם משתמש או שם מלא. מוצג: פעיל או מושבת, נעול, כניסה אחרונה, מתי שונתה הסיסמה, OU וקבוצות.",
+      "params": [
+        {
+          "name": "User",
+          "label": "שם משתמש או חלק מהשם",
+          "default": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ad-locked",
+      "category": "משתמשים ו-AD",
+      "title": "משתמשים נעולים",
+      "risk": "read",
+      "runOn": "dc",
+      "file": "ad\\Get-LockedUsers.ps1",
+      "desc": "כל החשבונות שנעולים כרגע אחרי ניסיונות סיסמה שגויים."
+    },
+    {
+      "id": "ad-unlock",
+      "category": "משתמשים ו-AD",
+      "title": "שחרור נעילה",
+      "risk": "change",
+      "runOn": "dc",
+      "file": "ad\\Unlock-User.ps1",
+      "desc": "משחרר נעילה של חשבון. הסיסמה לא משתנה.",
+      "actions": "1. Unlock-ADAccount למשתמש שהוזן",
+      "params": [
+        {
+          "name": "User",
+          "label": "שם משתמש מדויק (SamAccountName)",
+          "default": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ad-reset",
+      "category": "משתמשים ו-AD",
+      "title": "איפוס סיסמה",
+      "risk": "change",
+      "runOn": "dc",
+      "file": "ad\\Reset-UserPassword.ps1",
+      "desc": "יוצר סיסמה זמנית אקראית ומחייב החלפה בכניסה הבאה. הסיסמה מוצגת פעם אחת על המסך ולא נשמרת בלוג.",
+      "actions": "1. סיסמה זמנית אקראית\n2. חובת החלפה בכניסה הבאה\n3. שחרור נעילה",
+      "params": [
+        {
+          "name": "User",
+          "label": "שם משתמש מדויק (SamAccountName)",
+          "default": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ad-new",
+      "category": "משתמשים ו-AD",
+      "title": "פתיחת משתמש חדש לפי תבנית",
+      "risk": "change",
+      "runOn": "dc",
+      "file": "ad\\New-AdUserFromTemplate.ps1",
+      "desc": "פותח משתמש עם אותן קבוצות, OU, מחלקה וכתובת כמו משתמש קיים (למשל מזכירה אחרת באותו סניף). הסיסמה הזמנית מוצגת פעם אחת.",
+      "actions": "1. יצירת משתמש באותו OU של התבנית\n2. העתקת מחלקה, חברה, משרד וכתובת\n3. הוספה לכל הקבוצות של התבנית\n4. סיסמה זמנית וחובת החלפה",
+      "params": [
+        {
+          "name": "First",
+          "label": "שם פרטי (באנגלית או בעברית)",
+          "default": "",
+          "required": true
+        },
+        {
+          "name": "Last",
+          "label": "שם משפחה",
+          "default": "",
+          "required": false
+        },
+        {
+          "name": "Sam",
+          "label": "שם משתמש (SamAccountName), למשל dana.c",
+          "default": "",
+          "required": true
+        },
+        {
+          "name": "Template",
+          "label": "משתמש תבנית להעתקה (SamAccountName)",
+          "default": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ad-disable",
+      "category": "משתמשים ו-AD",
+      "title": "השבתת עובד שעוזב",
+      "risk": "change",
+      "runOn": "dc",
+      "file": "ad\\Disable-LeavingUser.ps1",
+      "desc": "משבית את החשבון ורושם בתיאור שלו מתי ומי השבית. החשבון לא נמחק והקבוצות לא מוסרות, אלא רק מוצגות, כך שאפשר להחזיר הכול.",
+      "actions": "1. Disable-ADAccount\n2. עדכון השדה Description עם תאריך ההשבתה\n3. הצגת רשימת הקבוצות (בלי הסרה)",
+      "params": [
+        {
+          "name": "User",
+          "label": "שם משתמש מדויק (SamAccountName)",
+          "default": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ad-group",
+      "category": "משתמשים ו-AD",
+      "title": "חברי קבוצה",
+      "risk": "read",
+      "runOn": "dc",
+      "file": "ad\\Get-GroupMembers.ps1",
+      "desc": "כל החברים בקבוצה, כולל קבוצות מקוננות, עם סטטוס וכניסה אחרונה. טוב לבדוק מי ב-Domain Admins.",
+      "params": [
+        {
+          "name": "Group",
+          "label": "שם הקבוצה",
+          "default": "Domain Admins",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ad-stale",
+      "category": "משתמשים ו-AD",
+      "title": "משתמשים ומחשבים לא פעילים",
+      "risk": "read",
+      "runOn": "dc",
+      "file": "ad\\Get-StaleAccounts.ps1",
+      "desc": "חשבונות פעילים שלא התחברו X ימים. אלה מועמדים להשבתה ומהווים סיכון אבטחה.",
+      "params": [
+        {
+          "name": "Days",
+          "label": "לא התחברו כמה ימים?",
+          "default": "90",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "m365-dl",
+      "category": "Office 365",
+      "title": "רשימת תפוצה: כל החברים",
+      "risk": "read",
+      "runOn": "console",
+      "file": "m365\\Export-DistributionList.ps1",
+      "desc": "כל החברים ברשימת תפוצה, כולל רשימות מקוננות (בלי כפילויות), עם סוג החבר. ריק = רשימה של כל רשימות התפוצה.",
+      "params": [
+        {
+          "name": "List",
+          "label": "כתובת הרשימה (ריק = הצג את כל הרשימות)",
+          "default": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "m365-fwd",
+      "category": "Office 365",
+      "title": "העברות מייל חשודות",
+      "risk": "read",
+      "runOn": "console",
+      "file": "m365\\Get-MailForwarding.ps1",
+      "desc": "תיבות שמעבירות מייל החוצה. העברה לכתובת חיצונית היא סימן נפוץ לתיבה שנפרצה. אפשר לסרוק גם כללי Inbox (איטי).",
+      "params": [
+        {
+          "name": "Rules",
+          "label": "לסרוק גם כללי Inbox? (כן/לא, איטי)",
+          "default": "לא",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "m365-perm",
+      "category": "Office 365",
+      "title": "הרשאות לתיבות",
+      "risk": "read",
+      "runOn": "console",
+      "file": "m365\\Get-MailboxPermissions.ps1",
+      "desc": "FullAccess, SendAs ו-SendOnBehalf לתיבה מסוימת. ריק = כל התיבות המשותפות.",
+      "params": [
+        {
+          "name": "Mailbox",
+          "label": "כתובת התיבה (ריק = כל התיבות המשותפות)",
+          "default": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "m365-size",
+      "category": "Office 365",
+      "title": "גודל תיבות וכניסה אחרונה",
+      "risk": "read",
+      "runOn": "console",
+      "file": "m365\\Get-MailboxSizes.ps1",
+      "desc": "גודל מול מכסה לכל תיבה. מעל 85% מסומן. תיבה שלא נכנסו אליה 90 יום מסומנת לבדיקה (אולי אפשר לחסוך רישיון)."
+    },
+    {
+      "id": "m365-lic",
+      "category": "Office 365",
+      "title": "רישיונות: בשימוש מול פנויים",
+      "risk": "read",
+      "runOn": "console",
+      "file": "m365\\Get-Licenses.ps1",
+      "desc": "כמה רישיונות קנויים מול בשימוש, ומי מחזיק רישיון. משתמש חסום עם רישיון, או משתמש שלא נכנס 60 יום, מסומן."
+    },
+    {
+      "id": "m365-mfa",
+      "category": "Office 365",
+      "title": "מצב MFA לכל המשתמשים",
+      "risk": "read",
+      "runOn": "console",
+      "file": "m365\\Get-MfaStatus.ps1",
+      "desc": "מי רשום ל-MFA ובאילו שיטות. מנהל בלי MFA זה הסיכון מספר 1."
+    },
+    {
+      "id": "sec-admins",
+      "category": "אבטחה",
+      "title": "מי Local Admin",
+      "risk": "read",
+      "runOn": "target",
+      "file": "security\\Get-LocalAdmins.ps1",
+      "desc": "חברי קבוצת Administrators המקומית. כל מי שהוא לא Administrator מובנה ולא Domain Admins מסומן לבדיקה."
+    },
+    {
+      "id": "sec-bitlocker",
+      "category": "אבטחה",
+      "title": "מצב BitLocker",
+      "risk": "read",
+      "runOn": "target",
+      "file": "security\\Get-BitLockerStatus.ps1",
+      "desc": "מצב ההצפנה בכל כונן וסוגי המפתחות. כדי לראות את מפתח השחזור עצמו, משתמשים בכלי בקטגוריה 'רגיש'."
+    },
+    {
+      "id": "sec-defender",
+      "category": "אבטחה",
+      "title": "מצב Defender",
+      "risk": "read",
+      "runOn": "target",
+      "file": "security\\Get-DefenderStatus.ps1",
+      "desc": "אנטי-וירוס והגנה בזמן אמת, גיל החתימות, סריקה אחרונה, Tamper Protection ואיומים שזוהו ב-30 הימים האחרונים."
+    },
+    {
+      "id": "sec-failed",
+      "category": "אבטחה",
+      "title": "כניסות שנכשלו (מה-DC)",
+      "risk": "read",
+      "runOn": "dc",
+      "file": "ad\\Get-FailedLogons.ps1",
+      "desc": "ניסיונות סיסמה שגויים ונעילות, מקובצים לפי משתמש ומקור. 20 ניסיונות ומעלה ממקור אחד יכולים להעיד על ניחוש סיסמאות או על מכשיר עם סיסמה ישנה.",
+      "params": [
+        {
+          "name": "Hours",
+          "label": "כמה שעות אחורה?",
+          "default": "24",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "sens-wifi",
+      "category": "רגיש – מוצג רק על המסך",
+      "title": "סיסמאות WiFi שמורות",
+      "risk": "sensitive",
+      "runOn": "target",
+      "file": "sensitive\\Get-WifiPasswords.ps1",
+      "desc": "כל רשתות ה-WiFi השמורות במחשב עם הסיסמה. הקבצים הזמניים נמחקים מיד."
+    },
+    {
+      "id": "sens-keys",
+      "category": "רגיש – מוצג רק על המסך",
+      "title": "מפתחות רישיון Windows/Office",
+      "risk": "sensitive",
+      "runOn": "target",
+      "file": "sensitive\\Get-ProductKeys.ps1",
+      "desc": "מפתח היצרן מה-BIOS (OEM), המפתח המותקן מהרישום, ו-5 התווים האחרונים של כל רישיון Windows ו-Office עם הסטטוס שלו."
+    },
+    {
+      "id": "sens-bl-local",
+      "category": "רגיש – מוצג רק על המסך",
+      "title": "מפתח שחזור BitLocker מהמחשב",
+      "risk": "sensitive",
+      "runOn": "target",
+      "file": "sensitive\\Get-BitLockerKeysLocal.ps1",
+      "desc": "מפתח השחזור (48 ספרות) של כל כונן מוצפן ביעד."
+    },
+    {
+      "id": "sens-bl-ad",
+      "category": "רגיש – מוצג רק על המסך",
+      "title": "מפתח שחזור BitLocker מה-AD",
+      "risk": "sensitive",
+      "runOn": "dc",
+      "file": "sensitive\\Get-BitLockerKeysAD.ps1",
+      "desc": "כשמחשב נתקע במסך השחזור: מקלידים את שם המחשב או את 8 התווים הראשונים של ה-Key ID שעל המסך, ומקבלים את המפתח מה-AD.",
+      "params": [
+        {
+          "name": "Query",
+          "label": "שם מחשב או Key ID (8 תווים ראשונים)",
+          "default": "",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "sens-vt",
+      "category": "רגיש – מוצג רק על המסך",
+      "title": "בדיקת קבצים ב-VirusTotal",
+      "risk": "sensitive",
+      "runOn": "local",
+      "file": "sensitive\\Test-VirusTotal.ps1",
+      "desc": "בודק קובץ או תיקייה (עד 50 קבצים). ברירת המחדל שולחת רק את ה-Hash, והקובץ לא יוצא מהמחשב. העלאה של קובץ לא מוכר רק אם בחרת \"כן\". דורש VirusTotalApiKey ב-config.",
+      "actions": "1. חישוב SHA256 ובדיקה מול VirusTotal\n2. אם בחרת כן: העלאת קבצים שלא מוכרים (הם נשמרים אצל VirusTotal!)",
+      "params": [
+        {
+          "name": "Path",
+          "label": "נתיב לקובץ או לתיקייה",
+          "default": "",
+          "required": true
+        },
+        {
+          "name": "Upload",
+          "label": "להעלות קבצים שלא מוכרים? (כן/לא)",
+          "default": "לא",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "net-test",
+      "category": "רשת",
+      "title": "בדיקת חיבור ופורטים",
+      "risk": "read",
+      "runOn": "local",
+      "file": "network\\Test-HostPorts.ps1",
+      "desc": "מהמחשב שלך אל היעד: Ping, תרגום DNS, ובדיקה אם הפורטים פתוחים (RDP 3389, SMB 445, WinRM 5985, SQL 1433, HTTP/S).",
+      "params": [
+        {
+          "name": "Hosts",
+          "label": "יעדים (מופרדים בפסיק). ריק = היעד שנבחר",
+          "default": "",
+          "required": false
+        },
+        {
+          "name": "Ports",
+          "label": "פורטים לבדיקה",
+          "default": "3389,445,5985,1433,80,443",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "net-winrm",
+      "category": "רשת",
+      "title": "בדיקת גישה מרחוק (WinRM)",
+      "risk": "read",
+      "runOn": "local",
+      "file": "network\\Test-RemoteAccess.ps1",
+      "desc": "בודק אם הכלי יכול להריץ פקודות על היעד. אם לא, מוצגת הסיבה ומה עושים. זה מה שכפתור \"בדוק חיבור\" מריץ."
+    },
+    {
+      "id": "net-scan",
+      "category": "רשת",
+      "title": "סריקת מכשירים ברשת",
+      "risk": "read",
+      "runOn": "local",
+      "file": "network\\Find-NetworkDevices.ps1",
+      "desc": "Ping לכל 254 הכתובות ברשת, עם שם וכתובת MAC. טוב למציאת מדפסת, מצלמה או מחשב \"שנעלם\".",
+      "params": [
+        {
+          "name": "Subnet",
+          "label": "רשת לסריקה, למשל 192.168.1 (ריק = הרשת שלי)",
+          "default": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "rep-daily",
+      "category": "דוחות",
+      "title": "צ'קליסט בוקר (כל השרתים)",
+      "risk": "read",
+      "runOn": "local",
+      "file": "reports\\Invoke-DailyCheck.ps1",
+      "desc": "עובר על כל השרתים וה-DC מ-config ובודק בריאות, תעודות, גיבויי SQL, Jobs שנכשלו, משתמשים נעולים וקבצי גיבוי בתיקיות (BackupFolders). נשמר אוטומטית כדוח HTML. מה שלא תקין מופיע ראשון."
+    },
+    {
+      "id": "rep-inventory",
+      "category": "דוחות",
+      "title": "מלאי מחשבים",
+      "risk": "read",
+      "runOn": "local",
+      "file": "reports\\Get-Inventory.ps1",
+      "desc": "אוסף מכל המחשבים: דגם, סריאלי, מעבד, זיכרון, דיסק, גרסת Windows ומשתמש מחובר. נשמר כ-CSV שנפתח באקסל.",
+      "params": [
+        {
+          "name": "Computers",
+          "label": "AD = כל המחשבים הפעילים בדומיין, או רשימת שמות מופרדת בפסיק",
+          "default": "AD",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "rep-schedule",
+      "category": "דוחות",
+      "title": "הפעלת דוח בוקר אוטומטי",
+      "risk": "change",
+      "runOn": "local",
+      "file": "reports\\Register-DailyReport.ps1",
+      "desc": "יוצר משימה מתוזמנת במחשב שלך שמריצה את צ'קליסט הבוקר בימים א'-ה'. הדוח נפתח לבד, ואם יש בעיות מוצגת התראה.",
+      "actions": "1. יצירת משימה מתוזמנת IT-Toolkit Daily Report במחשב הזה\n2. רצה כמשתמש שלך כשאתה מחובר (בלי לשמור סיסמה)",
+      "params": [
+        {
+          "name": "Time",
+          "label": "באיזו שעה?",
+          "default": "07:30",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "OrgName": "הארגון שלי",
+  "DomainController": "DC-EXAMPLE",
+  "Servers": [
+    { "Name": "FILESRV01", "Roles": [ "File" ] },
+    { "Name": "SQLSRV01",  "Roles": [ "SQL" ], "SqlInstances": [ "." ], "SqlDatabases": [ "ProdDB1", "ProdDB2" ] }
+  ],
+  "Targets": [ "PC-RECEPTION-01" ],
+  "BackupFolders": [
+    { "Path": "\\\\FILESRV01\\DBBackup", "MaxAgeHours": 26 }
+  ],
+  "StandardApps": [ "Google.Chrome", "Adobe.Acrobat.Reader.64-bit", "7zip.7zip", "AnyDeskSoftwareGmbH.AnyDesk" ],
+  "VirusTotalApiKey": "",
+  "DiskWarnPercent": 20,
+  "DiskCriticalPercent": 10,
+  "SqlFullBackupMaxHours": 26
+}
