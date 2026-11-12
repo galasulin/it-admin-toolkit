@@ -1,4 +1,4 @@
 config.json
 logs/
-reports/
+/reports/
 ui-src/node_modules/
