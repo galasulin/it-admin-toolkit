@@ -40,12 +40,24 @@
 
 <table>
 <tr>
-<td width="50%"><a href="docs/screenshots/app-home.png"><img src="docs/screenshots/app-home.png" width="100%"></a><br><sub><b>מסך הבית</b> · בחירת יעד, צ'קליסט בוקר, הכלים הנפוצים, תפריט צד של 11 קטגוריות</sub></td>
-<td width="50%"><a href="docs/screenshots/app-tool.png"><img src="docs/screenshots/app-tool.png" width="100%"></a><br><sub><b>דף כלי</b> · תיאור, תגית סיכון, יעד וכפתור הרצה</sub></td>
+<td width="50%"><a href="docs/screenshots/app-home.png"><img src="docs/screenshots/app-home.png" width="100%"></a><br><sub><b>מסך הבית</b> · בחירת יעד, צ'קליסט בוקר, הכלים הנפוצים, הרצות אחרונות</sub></td>
+<td width="50%"><a href="docs/screenshots/app-tool-result.png"><img src="docs/screenshots/app-tool-result.png" width="100%"></a><br><sub><b>כלי קריאה, אחרי הרצה</b> · מצב דיסקים במחשב המקומי: תוצאות בצבעים, סינון, HTML / אקסל / העתקה</sub></td>
+</tr>
+<tr>
+<td width="50%"><a href="docs/screenshots/app-confirm-change.png"><img src="docs/screenshots/app-confirm-change.png" width="100%"></a><br><sub><b>כלי שינוי: חלון האישור</b> · בדיוק מה ירוץ ועל איזה יעד, לפני "הרץ"</sub></td>
+<td width="50%"><a href="docs/screenshots/app-confirm-sensitive.png"><img src="docs/screenshots/app-confirm-sensitive.png" width="100%"></a><br><sub><b>כלי רגיש: האישור הראשון</b> · מוצג רק על המסך; שמירה לקובץ מבקשת אישור נוסף</sub></td>
+</tr>
+<tr>
+<td width="50%"><a href="docs/screenshots/app-palette.png"><img src="docs/screenshots/app-palette.png" width="100%"></a><br><sub><b>חיפוש מהיר (Ctrl+K)</b> · כל הכלים, לפי שם או תיאור</sub></td>
+<td width="50%"><a href="docs/screenshots/app-categories.png"><img src="docs/screenshots/app-categories.png" width="100%"></a><br><sub><b>11 קטגוריות</b> · תפריט הצד כשכל הקבוצות מקופלות, עם מספר הכלים בכל קטגוריה</sub></td>
+</tr>
+<tr>
+<td width="50%"><a href="docs/screenshots/app-dark.png"><img src="docs/screenshots/app-dark.png" width="100%"></a><br><sub><b>מצב כהה</b> · לפי הגדרת Windows</sub></td>
+<td width="50%"><a href="docs/screenshots/app-morning-report.png"><img src="docs/screenshots/app-morning-report.png" width="100%"></a><br><sub><b>דוח בוקר (HTML)</b> · הצ'קליסט נשמר כדוח, הבעיות קודם</sub></td>
 </tr>
 </table>
 
-<sub>הצילומים מנתוני דמו (Contoso, שרתים לדוגמה).</sub>
+<sub>צולם מהאפליקציה האמיתית שרצה מקומית עם config של דמו (Demo Org · demo.local, ‏SRV-DEMO-01, ‏PC-DEMO-07). רצו רק כלי קריאה, על המחשב המקומי; כלי שינוי וכלי רגיש מוצגים בחלון האישור, ואחריו בוטלו.</sub>
 
 ## מה זה
 

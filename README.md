@@ -38,12 +38,24 @@
 
 <table>
 <tr>
-<td width="50%"><a href="docs/screenshots/app-home.png"><img src="docs/screenshots/app-home.png" width="100%"></a><br><sub><b>Home</b> · target picker, morning checklist, most-used tools, sidebar of 11 categories</sub></td>
-<td width="50%"><a href="docs/screenshots/app-tool.png"><img src="docs/screenshots/app-tool.png" width="100%"></a><br><sub><b>Tool page</b> · description, risk tag, target and run button</sub></td>
+<td width="50%"><a href="docs/screenshots/app-home.png"><img src="docs/screenshots/app-home.png" width="100%"></a><br><sub><b>Home</b> · target picker, morning checklist, most-used tools, recent runs</sub></td>
+<td width="50%"><a href="docs/screenshots/app-tool-result.png"><img src="docs/screenshots/app-tool-result.png" width="100%"></a><br><sub><b>Read-only tool, after a run</b> · Disk status on the local PC: color-coded results, filter, HTML / Excel / copy</sub></td>
+</tr>
+<tr>
+<td width="50%"><a href="docs/screenshots/app-confirm-change.png"><img src="docs/screenshots/app-confirm-change.png" width="100%"></a><br><sub><b>Change tool: confirmation</b> · exactly what will run, on which target, before "Run"</sub></td>
+<td width="50%"><a href="docs/screenshots/app-confirm-sensitive.png"><img src="docs/screenshots/app-confirm-sensitive.png" width="100%"></a><br><sub><b>Sensitive tool: first confirmation</b> · shown on screen only; saving to a file asks again</sub></td>
+</tr>
+<tr>
+<td width="50%"><a href="docs/screenshots/app-palette.png"><img src="docs/screenshots/app-palette.png" width="100%"></a><br><sub><b>Quick search (Ctrl+K)</b> · every tool, by name or description</sub></td>
+<td width="50%"><a href="docs/screenshots/app-categories.png"><img src="docs/screenshots/app-categories.png" width="100%"></a><br><sub><b>11 categories</b> · the sidebar with every group collapsed, tool counts per category</sub></td>
+</tr>
+<tr>
+<td width="50%"><a href="docs/screenshots/app-dark.png"><img src="docs/screenshots/app-dark.png" width="100%"></a><br><sub><b>Dark mode</b> · follows the Windows setting</sub></td>
+<td width="50%"><a href="docs/screenshots/app-morning-report.png"><img src="docs/screenshots/app-morning-report.png" width="100%"></a><br><sub><b>Morning report (HTML)</b> · the checklist saved as a report, problems first</sub></td>
 </tr>
 </table>
 
-<sub>Screenshots use demo data (Contoso, example servers).</sub>
+<sub>Captured from the real app running locally with a demo config (Demo Org · demo.local, SRV-DEMO-01, PC-DEMO-07). Only read tools ran, on the local PC; change and sensitive tools are shown at their confirmation, then cancelled.</sub>
 
 ## What it is
 

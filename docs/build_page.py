@@ -75,8 +75,8 @@ table{{width:100%;border-collapse:collapse;background:var(--surface);border:1px 
 </header>
 <main class="wrap">
 <div class="shots">
-<figure><img src="screenshots/app-home.png" alt="Toolkit home screen with demo identity and example servers" loading="lazy"><figcaption>מסך הבית: צ'קליסט בוקר, הכלים הנפוצים והיעדים. נתוני דמו (Contoso, שרתים לדוגמה)</figcaption></figure>
-<figure><img src="screenshots/app-tool.png" alt="A read-only tool page, System information" loading="lazy"><figcaption>דף כלי לקריאה בלבד ("מידע מערכת"), לפני הרצה</figcaption></figure>
+<figure><img src="screenshots/app-home.png" alt="Toolkit home screen with demo identity and example servers" loading="lazy"><figcaption>מסך הבית: צ'קליסט בוקר, הכלים הנפוצים והיעדים. config של דמו (Demo Org · demo.local)</figcaption></figure>
+<figure><img src="screenshots/app-tool-result.png" alt="A read-only tool after a local run, Disk status" loading="lazy"><figcaption>כלי לקריאה בלבד ("מצב דיסקים") אחרי הרצה על המחשב המקומי</figcaption></figure>
 </div>
 <h2>הכלים בממשק</h2><p class="sub">כל כלי מסומן לפי רמת הסיכון. כלים שמשנים הגדרות מבקשים אישור, וכל הרצה נרשמת ביומן.</p>
 <div class="grid">{''.join(cards)}</div>
